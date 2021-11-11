@@ -23,6 +23,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, id: Math.random() }))
     
+    setChoiceTwo(null)
+    setChoiceOne(null)
     setCards(suffledCards)
     setTurns(0)
   }
@@ -33,7 +35,7 @@ function App() {
   }
 
   // compare two selected cards
-  useEffect (() => {
+  useEffect(() => {
     if (choiceOne && choiceTwo) {
       setDisapbled(true)
       if (choiceOne.src === choiceTwo.src) {
@@ -63,6 +65,11 @@ function App() {
     setDisapbled(false)
   }
 
+  // start a new game auto
+  useEffect(() => {
+    suffleCards()
+  }, [])
+
   return (
     <div className="App">
         <h1>Squid game</h1>
@@ -79,6 +86,7 @@ function App() {
             />
           ))}
         </div>
+        <p>Turns: {turns}</p>
     </div>
   );
 }
